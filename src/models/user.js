@@ -86,4 +86,10 @@ const User = connection.define("user", {
     
 },  {  underscored: true, paranoide: true })
 
+User.associate = (models) => {
+    User.belongsTo(models.StoreHouse, {
+        foreingkey: "storehouses_id",
+        allowNull: false
+        })
+    }
 module.exports = { User }

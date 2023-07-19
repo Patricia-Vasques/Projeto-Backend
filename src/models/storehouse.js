@@ -104,4 +104,10 @@ status:{
 
 },  {  underscored: true })
 
+StoreHouse.associate = (models) => {
+    StoreHouse.belongsTo(models.User, {
+      foreingkey: "users_id",
+      allowNull: false
+    })
+}
 module.exports = { StoreHouse }
