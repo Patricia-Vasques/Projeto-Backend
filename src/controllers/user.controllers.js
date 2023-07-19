@@ -91,6 +91,37 @@ class UserController {
         return res.status(400).json({ error: "Ocorreu um erro no servidor." });
         }
     }
+
+    //Atualização de dados do usuário pelo Id
+    async updateOneUser(req, res){
+        try{
+            const { id } = req.params;
+            const {
+                name,
+                surname,
+                gender,
+                telephone
+            } = req.body
+
+            
+            const user = await User.findByPk(id);
+            if(!user) {
+                return res.status(404).json({ error: "Usuário não encontrado!"})
+            }
+
+            user.name = name || user.name;
+            user.surname = surname || user.surname;
+            user.gender = gender || user.gender;
+            user.telephone = telephone || user.telephone;
+
+            await user.update({name, surname, gender, telephone }, {where: {user}});
+
+            return res.status(204).json();
+        }catch (error) {
+            console.error(error);
+            return res.status(400).json({error: "Não foi possível atualizar os dados"})
+        }
+    }
 }
 
 module.exports = new UserController()
