@@ -1,4 +1,5 @@
 const { User } = require('../models/user')
+const { sign } = require('jsonwebtoken')
 
 class UserController {
 
@@ -62,6 +63,32 @@ class UserController {
             });
         } catch (error) {
             return res.status(400).json({ error: error.message });
+        }
+    }
+
+    //Login do usuário retornando um token
+    async loginUser(req, res){
+        try{
+        const { email, password } = req.body;
+
+        const user = await User.findOne({ where: { email }});
+        if(!user) {
+            return res.status(404).json({error: "E-mail do usuário não encontrado!"});
+        }
+
+        if (user.password !== password){
+            return res.status(400).json({error: "Email ou senha inválidos!"})
+        }
+        else {
+        //Token para autenticação
+        const payload = {"email": user.email, "senha":user.password}
+
+        const token = sign(payload, process.env.SECRET_JWT)
+        return res.status(200).json({ token });
+        }
+    
+        } catch (error) {
+        return res.status(400).json({ error: "Ocorreu um erro no servidor." });
         }
     }
 }
