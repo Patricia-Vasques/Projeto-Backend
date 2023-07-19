@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const { createOneUser, loginUser, updateOneUser } = require ('../controllers/user.controllers')
+const { createOneUser, loginUser, updateOneUser, upstatusOneUser } = require ('../controllers/user.controllers')
 const { auth } = require('../middleware/auth')
 
 class UserRouter {
@@ -7,7 +7,8 @@ class UserRouter {
         const userRoutes = Router()
         userRoutes.post('/usuarios', createOneUser),
         userRoutes.post('/usuarios/login',loginUser),
-        userRoutes.patch('/usuarios/:id', auth, updateOneUser)
+        userRoutes.patch('/usuarios/:id', auth, updateOneUser),
+        userRoutes.patch('/usuarios/:id/status', auth, upstatusOneUser)
 
         return userRoutes
     }
