@@ -136,6 +136,27 @@ class StoreHouseControllers {
                 return res.status(400).json({ error: "Não foi possível atualizar os dados do depósito!"})
             }
         }
+
+        ////Atualização do status do depósito no sistema 
+        async upstatusOneStoreHouse(req, res) {
+            const { id } = req.params;
+
+            try {
+                const storeHouse = await StoreHouse.findByPk(id);
+                if (!storeHouse) {
+                return res.status(404).json({ error: "Depósito não encontrado!" });
+                }
+
+                const newStatus = storeHouse.status === "Ativo" ? "Inativo" : "Ativo";
+                await storeHouse.update({ status: newStatus });
+
+                return res.status(204).json(storeHouse);
+            } catch (error) {
+                console.error(error);
+                return res.status(400).json({ error: "Erro ao atualizar status do depósito!" });
+            }
+          }
+
 }
 
 module.exports = new StoreHouseControllers()
