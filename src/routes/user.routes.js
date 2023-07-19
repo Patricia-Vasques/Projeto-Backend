@@ -1,6 +1,7 @@
 const { Router } = require('express')
-const { createOneUser, loginUser, updateOneUser, upstatusOneUser, uppasswordOneUser } = require ('../controllers/user.controllers')
+const { createOneUser, loginUser, updateOneUser, upstatusOneUser, uppasswordOneUser, listOneUser } = require ('../controllers/user.controllers')
 const { auth } = require('../middleware/auth')
+const { useResolvedPath } = require('react-router-dom')
 
 class UserRouter {
     routesFromUser () {
@@ -9,7 +10,8 @@ class UserRouter {
         userRoutes.post('/usuarios/login',loginUser),
         userRoutes.patch('/usuarios/:id', auth, updateOneUser),
         userRoutes.patch('/usuarios/:id/status', auth, upstatusOneUser),
-        userRoutes.patch('/usuarios/:id/senha', auth, uppasswordOneUser)
+        userRoutes.patch('/usuarios/:id/senha', auth, uppasswordOneUser),
+        userRoutes.get('/usuarios/:id', auth, listOneUser)
 
         return userRoutes
     }
