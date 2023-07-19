@@ -123,26 +123,53 @@ class UserController {
         }
     }
 
-    //Atualizando o status do usuário no sistema
-    async upstatusOneUser (req, res) {
-
-        try {
+        //Atualizando o status do usuário no sistema
+        async upstatusOneUser (req, res) {
+            try {
             const { id } = req.params;
 
-          const user = await User.findByPk(id);
-          if (!user) {
-            return res.status(404).json({ error: "Usuário não encontrado!" });
-          }
-      
-          const newStatus = user.status === "Ativo" ? "Inativo" : "Ativo";
-          await user.update({ status: newStatus });
-      
-          return res.status(200).json(user);
-        } catch (error) {
-          console.error(error);
-          return res.status(400).json({ error: "Erro ao atualizar status do usuário!" });
+            const user = await User.findByPk(id);
+            if (!user) {
+                return res.status(404).json({ error: "Usuário não encontrado!" });
+            }
+    
+            const newStatus = user.status === "Ativo" ? "Inativo" : "Ativo";
+            await user.update({ status: newStatus });
+    
+            return res.status(200).json(user);
+            } catch (error) {
+                console.error(error);
+                return res.status(400).json({ error: "Erro ao atualizar status do usuário!" });
+            }
         }
-      }
+
+        // Atualização de Senha do Usuário
+        async uppasswordOneUser(req, res){
+            try{
+                const { id } = req.params
+                const { password } = req.body
+
+                const user = await User.findByPk(id)
+                if(!user) {
+                return res.status(404).json({error: 'Usuário não encontrado'})
+                }
+
+                const strongPasswordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[a-zA-Z\d!@#$%^&*()]+$/
+                if (!strongPasswordRegex.test(password)) {
+                return res.status(400).json({ error: "A senha deve conter pelo menos 1 letra maiúscula, 1 número e 1 caractere especial e min 8 char." });
+                }
+
+                user.password = password
+                await user.save()
+
+                return res.status(204).json(user)
+            } catch (error) {
+            console.error(error)
+            return res.status(400).json({error: "Erro ao atualizar senha"})
+        }
+    }
+
+
 }
 
 module.exports = new UserController()
