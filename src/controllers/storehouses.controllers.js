@@ -192,6 +192,36 @@ class StoreHouseControllers {
                 }
             }
 
+            //Deletando um depósito que esteja inativo e sem medicamentos
+            async deleteStoreHouse (req, res) {
+                try{
+                    const { id } = req.params
+
+                    const storeHouse = await StoreHouse.findByPk(id)
+                    if(!storeHouse){
+                        return res.status(404).json({error: "Depósito não encontrado!"})
+                    }
+
+                    const medication = await Medication.findOne({where: {storehouses_id: id}})
+                    if(medication){
+                        return res.status(404).json({error: "Depóstio possui medicamento cadastrado e não pode ser excluido!"})
+                    }
+
+                    
+                    if(storeHouse.status === 'Ativo'){
+                        return res.status(404).json({error: "Depósito está ativo e não pode ser excluido!"})
+                    }
+                    
+                    await StoreHouse.destroy({
+                        where: {id}
+                    })
+                    return res.status(204).json()
+                    }catch(error){
+                        console.error(error)
+                        return res.status(400).json({error: "Erro ao excluir depósito!"})
+                    }
+                }
+
 }
 
 module.exports = new StoreHouseControllers()
