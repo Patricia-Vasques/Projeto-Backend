@@ -1,5 +1,6 @@
 const { INTEGER, STRING, DATE, ENUM } = require ('sequelize')
 const { connection } = require('../database/connection')
+const { User } = require ('./user')
 
 
 const StoreHouse = connection.define("storehouse", {
