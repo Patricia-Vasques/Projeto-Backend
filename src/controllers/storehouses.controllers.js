@@ -155,7 +155,26 @@ class StoreHouseControllers {
                 console.error(error);
                 return res.status(400).json({ error: "Erro ao atualizar status do depósito!" });
             }
-          }
+        }
+
+        //Listando depósito pelo status
+        async listStoreHouseStatus (req, res) {
+            
+            try {
+                const { status } = req.query
+                let storeHouses;
+
+                if  (status === 'Ativo' || status === 'Inativo') {
+                  storeHouses = await StoreHouse.findAll({ where: { status: status} });
+                }
+
+                return res.status(200).json(storeHouses);
+                } catch (error) {
+                console.error(error);
+                return res.status(500).json({ error: 'Erro ao listar depósitos cadastrados.' });
+                }
+            }
+
 
 }
 
