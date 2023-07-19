@@ -122,6 +122,27 @@ class UserController {
             return res.status(400).json({error: "Não foi possível atualizar os dados"})
         }
     }
+
+    //Atualizando o status do usuário no sistema
+    async upstatusOneUser (req, res) {
+
+        try {
+            const { id } = req.params;
+
+          const user = await User.findByPk(id);
+          if (!user) {
+            return res.status(404).json({ error: "Usuário não encontrado!" });
+          }
+      
+          const newStatus = user.status === "Ativo" ? "Inativo" : "Ativo";
+          await user.update({ status: newStatus });
+      
+          return res.status(200).json(user);
+        } catch (error) {
+          console.error(error);
+          return res.status(400).json({ error: "Erro ao atualizar status do usuário!" });
+        }
+      }
 }
 
 module.exports = new UserController()
