@@ -90,6 +90,11 @@ User.associate = (models) => {
     User.belongsTo(models.StoreHouse, {
         foreingkey: "storehouses_id",
         allowNull: false
+        }),
+        
+        User.hasMany(models.Medication, {
+            foreingkey: "medications_id",
+            allowNull: false
         })
     }
 module.exports = { User }

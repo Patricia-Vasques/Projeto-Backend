@@ -79,4 +79,15 @@ const Medication = connection.define("medication", {
       },
 }, {  underscored: true, paranoid: true })
 
+Medication.associate = (models) => {
+    Medication.belongsTo(models.User, {
+        foreingkey: "users_id",
+        allowNull: false
+    }),
+    Medication.belongsTo(models.StoreHouse, {
+    foreingkey: "storehouses_id",
+    allowNull: false
+    })
+}
+
 module.exports = { Medication }

@@ -106,8 +106,12 @@ status:{
 
 StoreHouse.associate = (models) => {
     StoreHouse.belongsTo(models.User, {
-      foreingkey: "users_id",
-      allowNull: false
-    })
+        foreingkey: "users_id",
+        allowNull: false
+    }),
+    StoreHouse.hasMany(models.Medication, {
+        foreingkey: "medications_id",
+        allowNull: false
+        })
 }
 module.exports = { StoreHouse }
