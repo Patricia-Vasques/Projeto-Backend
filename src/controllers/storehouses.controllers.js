@@ -83,6 +83,59 @@ class StoreHouseControllers {
             return res.status(400).json({ error: "Não foi possível cadastrar o depósito" })
             }
         }
+
+        //Atualizando os dados do depósito pelo identificador 
+    async updateStoreHouse (req, res) {
+        try{
+            const { id } = req.params;
+
+            const{
+                trade_name,
+                email,
+                tel,
+                cel,
+                address,
+                number,
+                neighborhood,
+                city,
+                state,
+                complement,
+                latitude,
+                longitude
+            } = req.body
+    
+            
+                const storeHouse = await StoreHouse.findByPk(id);
+                if(!storeHouse){
+                    return res.status(404).json({ error: "Depósito não encontrado!" })
+                }
+    
+                storeHouse.trade_name = trade_name || storeHouse.trade_name;
+                storeHouse.email = email || storeHouse.email;
+                storeHouse.tel = tel || storeHouse.tel;
+                storeHouse.cel= cel || storeHouse.cel;
+                storeHouse.address = address ||storeHouse.address;
+                storeHouse.number = number || storeHouse.number;
+                storeHouse.neighborhood = neighborhood || storeHouse.neighborhood;
+                storeHouse.city = city || storeHouse.city;
+                storeHouse.state = state || storeHouse.state;
+                storeHouse.complement = complement || storeHouse.complement;
+                storeHouse.longitude = longitude || storeHouse.longitude;
+                storeHouse.latitude = latitude || storeHouse.latitude;
+                
+    
+                await storeHouse.update({
+                    trade_name, email, tel, cel, address,
+                    number, neighborhood, city, state,
+                    complement, longitude, latitude}, 
+                    {where: {storeHouse}});
+    
+                return res.status(204).json(storeHouse);
+            } catch (error) {
+                console.error(error);
+                return res.status(400).json({ error: "Não foi possível atualizar os dados do depósito!"})
+            }
+        }
 }
 
 module.exports = new StoreHouseControllers()
