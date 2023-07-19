@@ -1,7 +1,7 @@
 const { Router } = require('express')
 const { createOneUser, loginUser, updateOneUser, upstatusOneUser, uppasswordOneUser, listOneUser } = require ('../controllers/user.controllers')
 const { auth } = require('../middleware/auth')
-const { useResolvedPath } = require('react-router-dom')
+
 
 class UserRouter {
     routesFromUser () {
