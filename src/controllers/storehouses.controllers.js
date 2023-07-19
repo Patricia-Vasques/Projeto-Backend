@@ -174,7 +174,23 @@ class StoreHouseControllers {
                 return res.status(500).json({ error: 'Erro ao listar depósitos cadastrados.' });
                 }
             }
+            
+            //Listando um depósito pelo identificador
+            async listStoreHouseId (req, res){
+                try{
+                    const {id} = req.params
 
+                    const storeHouse = await StoreHouse.findOne({ where: {id}})
+                    if(!storeHouse){
+                        return res.status(404).json({ error: "Depósito não encontrado!"})
+                    }
+
+                    return res.status(200).json(storeHouse)
+                }catch(error){
+                    console.error(error)
+                    return res.status(400).json({error: "Erro ao listar depósito! "})
+                }
+            }
 
 }
 
