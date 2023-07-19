@@ -169,6 +169,23 @@ class UserController {
         }
     }
 
+        //Listando o usuário pelo seu identificador
+    async listOneUser (req, res) {
+        try{
+        const { id } = req.params
+
+            const user = await User.findOne({ where: { id }, attributes: { exclude: ['password']} } )
+            if(!user) {
+                return res.status(404).json({error: 'Usuário não encontrado'})
+            }
+
+            return res.status(200).json(user)
+
+        }catch(error){
+            console.error(error)
+            return res.status(400).json({error: "Erro ao listar usuário"})
+        }
+    }
     
 }
 
