@@ -160,7 +160,7 @@ class UserController {
                 }
 
                 user.password = password
-                await user.save()
+                await user.update({password}, {where: {user}})
 
                 return res.status(204).json(user)
             } catch (error) {
@@ -169,7 +169,7 @@ class UserController {
         }
     }
 
-
+    
 }
 
 module.exports = new UserController()
