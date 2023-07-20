@@ -1,19 +1,19 @@
 # Pharmacy Central System 
+
 ## Descrição do Projeto final do módulo 2 - Backend
 
-
-Fui convidada pelo  LabPharmacy Inc, uma renomada empresa do ramo de tecnologia farmacêutica para desenvolver a parte do backend  do sistema chamado Pharmacy Central System, que é um sistema online criado para resolver problemas de gerenciamento de depósitos e medicamentos, proporcionando um ambiente digital eficiente e seguro para o controle e organização desses recursos.
+Fui convidada pelo  LabPharmacy Inc, uma renomada empresa do ramo de tecnologia farmacêutica para desenvolver a parte do backend do sistema chamado Pharmacy Central System, que é um sistema online criado para resolver problemas de gerenciamento de depósitos e medicamentos, proporcionando um ambiente digital eficiente e seguro para o controle e organização desses recursos.
 
 Com esse sistema o time de gestão poderá cadastra e gerenciar depósitos farmacêuticos, registrando medicamento com informações detalhadas, contralar o estoque, além de garantir um acesso seguro aos usuários do sistema.
-
-
 
 ## Tenologias Utilizadas
  O backend do Pharmacy Central System foi desenvolvido utilizando as seguintes tecnologias:
  
 - Node.js: É uma plataforma de desenvolvimento JavaScript para aplicações de rede e servidor.
 - Express.js: Frameword web para Node.js, que facilita a criação de APIs.
-- PostgreSQL: Banco de dados relacional, que será utilizado para armazenas os dados do sistema
+- Sequelize: Biblioteca que interege com o banco de dados relacional como o PostgreSQL.
+- PostgreSQL: Banco de dados relacional, que será utilizado para armazenar os dados do sistema.
+- DBeaver: Gerenciador de banco de dados SQL
 
 
 ## Como executar o sistema Pharmacy Central System
@@ -31,30 +31,37 @@ https://github.com/Patricia-Vasques/Projeto-Backend---Modulo-2.git
 3. Acesse o diretorio do projeto :
 
 ```sh
-cd Pharmacy Central System
+cd Projeto Backend
 ```
 
-4. Instale as dependências para rodas o projeto:
+4. Instale as dependências para rodar o projeto:
 
 ```sh
-npm init -y
+
 npm install
-npm install express cors
-npm install nodemon --save-dev
-npm install sequelize 
-npm install dotenv
-npm install jsonwebtoken
 ```
 
-5. Crie um banco de dados PostgreSQL e atualiza as configurações de conexão o arquivo .envexemple, com as informações do seu banco de dados.
-
-6. Inicie o servidor
+5. Inicie o servidor
 
 ```sh
 npm rum start:dev
 ```
 
-Agora você já pode acessar o Pharmacy Central System em seu navegador através do endereço, usei o ThunderClient para os testes ` http://localhost:3000`
+6. Crie um banco de dados PostgreSQL e atualiza as configurações de conexão do arquivo .envexemple, com as informações do seu banco de dados.
+Aqui você precisará ter um gerenciador database configurado. Neste projeto usei o DBeaver.
+
+[!Imagem_DBeaver.png]
+
+
+7. Para rodar as migrations para que as tabelas sejam inseridas em seu banco de dados fazer o comando:
+
+```sh
+npx sequelize db:migrate
+```
+
+8. Agora você já pode acessar o Pharmacy Central System em seu navegador através do endereço, usei o ThunderClient para os testes ` http://localhost:3000`
+
+
 
 ## Endpoint criados e suas descrições
 | Endpoint | Descrição |
@@ -76,6 +83,8 @@ Agora você já pode acessar o Pharmacy Central System em seu navegador através
 | Listagem de Depósitos | Acessamos HTTP GET no path /api/medicamentos. Aqui vamos listar os medicamento de acordo com o seu tipo(controlado, não controlado), exemplo de como acessar /api/medicamentos?tipo=CONTROLADO, neste caso se estiver tudo certo temos como retorno o status 200(OK) com a lista de medicamentos.
 |  Listagem de Medicamentos pelo identificador | Acessamos HTTP GET no path /api/medicamentos/{identificador}, se o identificador estiver no bando de dados temos como retorno 200(OK), retornando com os dados do medicamento, caso não esteja no bando de dados retorna um erro 404(Nto Found).
 | Exclusão de Medicamentos | Acessamos HTTP DELETE no path /api/medicamentos/{identificador}. Neste caso se o identificador estiver no banco de dados temos como retorno 204(No Content), se não estiver no banco de dados temos como retorno o erro 404(Not Found)
+
+
 ## Melhorias Futuras 
 Como melhorias futuras eu acrescentaria:
 * Criar um enpoint para excluir um usuário;
