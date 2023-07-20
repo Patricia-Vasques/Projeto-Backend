@@ -56,7 +56,7 @@ npm rum start:dev
 
 Agora você já pode acessar o Pharmacy Central System em seu navegador através do endereço, usei o ThunderClient para os testes ` http://localhost:3000`
 
-## Endpoint criados e suas descrições
+## Endpoint criados e suas funcionalidades
 | Endpoint | Descrição |
 | --- | --- |
 | Cadastro de Usuário  | Para cadastrar um usuário acesse HTTP POST no path /api/usuarios e no body preencha os campos obrigatórios, caso esses campos não estajam corretos retorna um erro 400(Bad Request). Para cadastrar um usuário o cpf e email não podem estar contidos já no banco de dados, se já estiver retorna um erro 404(Not Found) de usuário da cadastrado. Se o cadastro for feito corretamente retorna um status 201 com os dados do usuário cadastrado.|
@@ -76,6 +76,10 @@ Agora você já pode acessar o Pharmacy Central System em seu navegador através
 | Listagem de Depósitos | Acessamos HTTP GET no path /api/medicamentos. Aqui vamos listar os medicamento de acordo com o seu tipo(controlado, não controlado), exemplo de como acessar /api/medicamentos?tipo=CONTROLADO, neste caso se estiver tudo certo temos como retorno o status 200(OK) com a lista de medicamentos.
 |  Listagem de Medicamentos pelo identificador | Acessamos HTTP GET no path /api/medicamentos/{identificador}, se o identificador estiver no bando de dados temos como retorno 200(OK), retornando com os dados do medicamento, caso não esteja no bando de dados retorna um erro 404(Nto Found).
 | Exclusão de Medicamentos | Acessamos HTTP DELETE no path /api/medicamentos/{identificador}. Neste caso se o identificador estiver no banco de dados temos como retorno 204(No Content), se não estiver no banco de dados temos como retorno o erro 404(Not Found)
+
+## Organização do projeto
+Para realizar este projeto usei o método Kamban, onde montei os cards para cada endpoint dentro do trello.
+
 ## Melhorias Futuras 
 Como melhorias futuras eu acrescentaria:
 * Criar um enpoint para excluir um usuário;
