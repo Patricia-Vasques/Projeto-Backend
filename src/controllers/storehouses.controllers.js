@@ -1,4 +1,5 @@
 const { StoreHouse } = require('../models/storehouse')
+const { Medication } = require('../models/medication')
 
 class StoreHouseControllers {
     //Cadastrando um novo depósito
