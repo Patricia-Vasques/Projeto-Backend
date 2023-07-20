@@ -126,6 +126,44 @@ class MedicationControllers {
                 return res.status(400).json ({ error: "Erro ao listar medicamentos!"})
             }
         }
+
+        //Listando medicamentos pelo identificador 
+        async listMedicationId (req, res) {
+            try{
+                const {id} = req.params
+
+                const medication = await Medication.findOne({ where: {id}})
+                if(!medication){
+                    return res.status(404).json({error: "Medicamento não encontrado!"})
+                }
+
+                return res.status(200).json(medication)
+            }catch (error) {
+                console.error(error)
+                return res.status(400).json({error: "Não foi possível listar o medicamento!"})
+            }
+        }
+
+        //Deletar um medicamento
+        async deleteOneMedication(req, res) {
+            try{
+            const { id } = req.params
+
+            const medication = await Medication.findByPk(id)
+            if(!medication) {
+                return res.status(404).json({error: "Medicamento não encontrado!"})
+            }
+
+            await Medication.destroy({
+                where: {id}
+            })
+            return res.status(204).json()
+        }catch (error){
+            console.error(error)
+            return res.status(400).json({error: "Não foi possivel excluir o medicamento!"})
+        }
+    }   
 }
+
 
 module.exports = new MedicationControllers()
