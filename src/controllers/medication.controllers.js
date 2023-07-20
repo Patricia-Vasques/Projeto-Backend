@@ -107,6 +107,25 @@ class MedicationControllers {
             return res.status(400).json({message: "Não foi possível atualizar os dados do medicamento "})
         }
         }
+
+        //Listando medicamentos pelo tipo(controlado / não controlado)
+        async listMedicationType (req, res) {
+            try{
+                const {type} = req.query
+                let medications
+
+                if(type === 'controlado' || type ==='não controlado') { 
+                    medications = await Medication.findAll({ where: {type: type}});
+                    return res.status(200).json(medications)
+                } else {
+                    return res.status(400).json({error: "tipo do remédio tem que ser: controlado ou não controlado"})
+                }
+                
+            }catch (error) {
+                console.error(error)
+                return res.status(400).json ({ error: "Erro ao listar medicamentos!"})
+            }
+        }
 }
 
 module.exports = new MedicationControllers()
