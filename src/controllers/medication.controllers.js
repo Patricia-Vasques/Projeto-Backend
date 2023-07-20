@@ -63,6 +63,50 @@ class MedicationControllers {
             return res.status(400).json({error: "Erro ao fazer o cadastro do medicamento!"})
         }
     }
+
+    //Atualizar dados do medicamentos
+    async updateMedication (req, res){
+        try{
+            const{ id } = req.params
+            const{
+                description,
+                unit_price,
+                quantity
+            } = req.body
+
+            if (
+                req.body.users_id ||
+                req.body.storehouses_id ||
+                req.body.name_med ||
+                req.body.name_lab ||
+                req.body.dosage ||
+                req.body.dosage_unit ||
+                req.body.type
+              ) {
+                return res.status(400).json({
+                  error : "Este campo não pode ser atualizado!",
+                });
+              }
+
+            const medication = await Medication.findByPk(id);
+            if(!medication){
+                return res.status(404).json({message: "Medicamento não encontado!"})
+            }
+
+            medication.description = description || medication.description;
+            medication.unit_price = unit_price || medication.unit_price;
+            medication.quantity = quantity || medication.quantity;
+
+            await medication.update(
+                {description, unit_price, quantity},
+                {where: {medication}});
+            return res.status(200).json(medication)
+
+        }catch (error) {
+            console.error(error);
+            return res.status(400).json({message: "Não foi possível atualizar os dados do medicamento "})
+        }
+        }
 }
 
 module.exports = new MedicationControllers()
