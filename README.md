@@ -47,7 +47,7 @@ npm install
 npm rum start:dev
 ```
 
-6. Crie um banco de dados PostgreSQL e atualiza as configurações de conexão do arquivo .envexemple, com as informações do seu banco de dados.
+6. Crie um banco de dados PostgreSQL e atualiza as configurações de conexão do arquivo criando um arquivo .env, e completando conforme o exemplo .envexemple, com as informações do seu banco de dados.
 Aqui você precisará ter um gerenciador database configurado. Neste projeto usei o DBeaver.
 
 
