@@ -4,7 +4,6 @@
 ## Descrição do Projeto final do módulo 2 - Backend
 
 Fui convidada pelo  LabPharmacy Inc, uma renomada empresa do ramo de tecnologia farmacêutica para desenvolver a parte do backend do sistema chamado Pharmacy Central System, que é um sistema online criado para resolver problemas de gerenciamento de depósitos e medicamentos, proporcionando um ambiente digital eficiente e seguro para o controle e organização desses recursos.
-Fui convidada pelo  LabPharmacy Inc, uma renomada empresa do ramo de tecnologia farmacêutica para desenvolver a parte do backend do sistema chamado Pharmacy Central System, que é um sistema online criado para resolver problemas de gerenciamento de depósitos e medicamentos, proporcionando um ambiente digital eficiente e seguro para o controle e organização desses recursos.
 
 Com esse sistema o time de gestão poderá cadastra e gerenciar depósitos farmacêuticos, registrando medicamento com informações detalhadas, contralar o estoque, além de garantir um acesso seguro aos usuários do sistema.
 
