@@ -130,7 +130,7 @@ class MedicationControllers {
         //Listando medicamentos pelo identificador 
         async listMedicationId (req, res) {
             try{
-                const {id} = req.params
+                const {id} = req.query
 
                 const medication = await Medication.findOne({ where: {id}})
                 if(!medication){

@@ -179,7 +179,7 @@ class StoreHouseControllers {
             //Listando um depósito pelo identificador
             async listStoreHouseId (req, res){
                 try{
-                    const {id} = req.params
+                    const {id} = req.query
 
                     const storeHouse = await StoreHouse.findOne({ where: {id}})
                     if(!storeHouse){
